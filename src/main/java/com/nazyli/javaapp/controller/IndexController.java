@@ -39,7 +39,6 @@ public class IndexController {
 
         out.put("IPRequest", ipRequest);
         out.put("IPPrivate", ipServer);
-        out.put("IPPublic", InetAddress.getLocalHost().getHostAddress());
         out.put("Hostname", InetAddress.getLocalHost().getHostName());
         return out;
     }
