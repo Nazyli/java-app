@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -40,6 +41,7 @@ public class IndexController {
         out.put("IPRequest", ipRequest);
         out.put("IPPrivate", ipServer);
         out.put("Hostname", InetAddress.getLocalHost().getHostName());
+        out.put("Time", new Date().toString());
         return out;
     }
 
