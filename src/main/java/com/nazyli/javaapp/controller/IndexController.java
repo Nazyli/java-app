@@ -1,5 +1,9 @@
 package com.nazyli.javaapp.controller;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.system.JavaVersion;
+import org.springframework.boot.system.SystemProperties;
+import org.springframework.core.SpringVersion;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -42,6 +46,16 @@ public class IndexController {
         out.put("IPPrivate", ipServer);
         out.put("Hostname", InetAddress.getLocalHost().getHostName());
         out.put("Time", new Date().toString());
+        return out;
+    }
+    @GetMapping("/version")
+    public Map<String, Object> checkVersion(HttpServletRequest request) {
+        Map<String, Object> out = new HashMap<>();
+        out.put("app-version", "0.0.1");
+        out.put("spring-version", SpringVersion.getVersion());
+        out.put("jdk-version", SystemProperties.get("java.version"));
+        out.put("java-version", JavaVersion.getJavaVersion().toString());
+        out.put("time", new Date().toString());
         return out;
     }
 
