@@ -51,7 +51,7 @@ public class IndexController {
     @GetMapping("/version")
     public Map<String, Object> checkVersion(HttpServletRequest request) {
         Map<String, Object> out = new HashMap<>();
-        out.put("app-version", "0.0.3");
+        out.put("app-version", "0.0.4");
         out.put("spring-version", SpringVersion.getVersion());
         out.put("jdk-version", SystemProperties.get("java.version"));
         out.put("java-version", JavaVersion.getJavaVersion().toString());
