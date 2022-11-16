@@ -1,5 +1,8 @@
 package com.nazyli.javaapp.controller;
 
+import com.nazyli.javaapp.PropertiesLogger;
+import com.nazyli.javaapp.dto.PropertiesDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.system.JavaVersion;
 import org.springframework.boot.system.SystemProperties;
@@ -13,14 +16,13 @@ import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringTokenizer;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api")
 public class IndexController {
+    @Autowired
+    PropertiesLogger propertiesLogger;
 
     @GetMapping
     public Map<String, Object> checkHostname(HttpServletRequest request) throws UnknownHostException {
@@ -58,5 +60,21 @@ public class IndexController {
         out.put("time", new Date().toString());
         return out;
     }
+
+    @GetMapping("/env")
+    public List<PropertiesDto> getEnv(HttpServletRequest request) {
+        return propertiesLogger.printProperties();
+    }
+
+    @Value("${zone.region}")
+    private String myParameter;
+
+    @GetMapping("/testenv")
+    public Map<String, Object> testenv(HttpServletRequest request) {
+        Map<String, Object> out = new HashMap<>();
+        out.put("myParameter", myParameter);
+        return out;
+    }
+
 
 }
